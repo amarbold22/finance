@@ -4,7 +4,7 @@ import Navbar from "@/components/Navbar";
 import Record from "@/components/Records";
 import LendRecord from "@/components/Records/LendRecord";
 import FoodRecord from "@/components/Records/FoodRecord";
-import Modal from "@/components/Modal/blueModal";
+import Modal from "@/components/Modal";
 
 const Records = () => {
   const [category, setCategory] = useState([
@@ -29,11 +29,11 @@ const Records = () => {
             <p className="text-xl font-semibold">Records</p>
             <button
               className="flex align-center btn btn-sm bg-blue-500 text-white text-sm rounded-3xl w-full"
-              onClick={() => document.getElementById("my_modal_3").showModal()}
+              onClick={() => document.getElementById("addRecords").showModal()}
             >
               +Add
             </button>
-            <dialog id="my_modal_3" className="modal">
+            <dialog id="addRecords" className="modal">
               <Modal />
             </dialog>
           </div>

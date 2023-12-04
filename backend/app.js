@@ -6,6 +6,7 @@ require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const recordRoutes = require("./routes/recordRoutes");
 const imageRoutes = require("./routes/imageRoutes");
+const transRoutes = require("./routes/transRoutes");
 
 const PORT = process.env.PORT;
 const app = express();
@@ -17,6 +18,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/records", recordRoutes);
 
 app.use("/api/image", imageRoutes);
+
+app.use("/api", transRoutes);
 
 app.listen(PORT, ()=>{
     console.log(`Сервер ${PORT} дээр аслаа`);
