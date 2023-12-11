@@ -1,24 +1,12 @@
-import Link from 'next/link';
+import React, { useContext } from 'react'
 import { UserContext } from '@/context/UserProvider';
-import { useContext, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useRouter } from "next/router";
 
-export default function Home() {
-  const router = useRouter();
-  const { user } = useContext(UserContext);
-
-  useEffect(() => {
-    if(!user){
-      router.push("/login");
-    };
-  }, [user])
-
-  if(!user){
-    return null;
-  }
-
-  const { loginUserData, changeLoginUserData, login } = useContext(UserContext);
+const LogIn = () => {
+    const { loginUserData, changeLoginUserData, login } = useContext(UserContext);
+    const router = useRouter(); 
   return (
+    <>
     <main className='flex flex-row h-screen bg-white'>
       <div className='flex bg-white w-6/12 justify-center align-center m-auto'>
         <div className='flex flex-col gap-8 w-[384px] items-center'>
@@ -50,6 +38,8 @@ export default function Home() {
         </div>
       </div>
       <div className='hidden sm:flex bg-blue-500 w-6/12'></div>
-    </main>
+    </main></>
   )
 }
+
+export default LogIn;

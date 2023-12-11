@@ -1,10 +1,17 @@
 import BarChart from "@/components/BarChart";
 import Navbar from "@/components/Navbar";
-import React from "react";
+import React, { useContext } from "react";
 import DoughnutChart from "@/components/DoughnutChart";
 import Record from "@/components/Records";
+import { UserContext } from "@/context/UserProvider";
+import { useRouter } from "next/router";
 
 const Dashboard = () => {
+  const router = useRouter();
+  const { user } = useContext(UserContext);
+
+  if (!user) router.push("/login");
+
   return (
     <>
       <Navbar />

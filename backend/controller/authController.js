@@ -5,9 +5,7 @@ const bcrypt = require("bcrypt");
 
 const signup = async(req, res) => {
     try{
-        console.log(req.body);
         const { name, email, password } = req.body;
-        console.log(name, email, password);
         //password encryption
         const hashedPassword = bcrypt.hashSync(password, 10);
         await sql `INSERT INTO users(email, name, password) VALUES(${email}, ${name}, ${hashedPassword})`;
