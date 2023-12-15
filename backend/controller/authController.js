@@ -8,8 +8,9 @@ const signup = async(req, res) => {
         const { name, email, password } = req.body;
         //password encryption
         const hashedPassword = bcrypt.hashSync(password, 10);
-        await sql `INSERT INTO users(email, name, password) VALUES(${email}, ${name}, ${hashedPassword})`;
-        res.status(200).json({ message: "Success"});
+        const data = await sql `INSERT INTO users(email, name, password) VALUES(${email}, ${name}, ${hashedPassword}) RETURNING id`;
+        const { id } = data[0];
+        res.status(200).json({ message: "Success", user: {id} });
     }
     catch(err){
         console.log(err);
@@ -36,4 +37,19 @@ const signin = async (req, res) => {
     }
 };
 
-module.exports = { signup, signin };
+const updateUser = async (req, res) => {
+    try{
+        const { currency_type, balance } =  req.body;
+        const { userId } = req.params;
+
+        const data = await sql`UPDATE users SET currency_type=${currency_type}, balance=${balance} WHERE id=${userId} RETURNING *`
+
+        const { password, ...user }= data[0];
+        res.status(200).json({ message: "success", user});
+    }
+    catch(err){
+        res.status(500).json({message: "failed"});
+    }
+};
+
+module.exports = { signup, signin, updateUser };

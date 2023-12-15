@@ -3,7 +3,7 @@ import Link from "next/link";
 import { UserContext } from "@/context/UserProvider";
 
 export default function Signup() {
-  const { loginUserData, changeLoginUserData, login } = useContext(UserContext);
+  const { changeFormUserData, signup } = useContext(UserContext);
   return (
     <div className="flex flex-row h-screen bg-white">
       <div className="flex bg-white w-6/12 justify-center align-center m-auto">
@@ -31,30 +31,43 @@ export default function Signup() {
           <div className="flex flex-col gap-2 w-full">
             <input
               type="text"
+              name="name"
               placeholder="Name"
               className="border-gray-300 pl-3 input"
+              onChange={(e) => {
+                changeFormUserData(e.target.name, e.target.value);
+              }}
             ></input>
             <input
               type="text"
               name="email"
               placeholder="E-mail"
               className="border-gray-300 pl-3 input"
+              onChange={(e) => {
+                changeFormUserData(e.target.name, e.target.value);
+              }}
             ></input>
             <input
               type="password"
-              name="password"
+              name="password1"
               placeholder="Password"
               className="border-gray-300 pl-3 input"
+              onChange={(e) => {
+                changeFormUserData(e.target.name, e.target.value);
+              }}
             ></input>
             <input
               type="password"
-              name="password"
+              name="password2"
               placeholder="Confirm password"
               className="border-gray-300 pl-3 input"
+              onChange={(e) => {
+                changeFormUserData(e.target.name, e.target.value);
+              }}
             ></input>
-            <Link href="/signup/step1">
-              <button className="btn bg-blue-500 w-full">Sign Up</button>
-            </Link>
+            <button className="btn bg-blue-500 w-full" onClick={signup}>
+              Sign Up
+            </button>
           </div>
           <div className="flex flex-row items-center">
             <p className="">Already have an account?</p>

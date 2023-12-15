@@ -1,9 +1,10 @@
 import React, { useContext } from 'react'
 import { UserContext } from '@/context/UserProvider';
 import { useRouter } from "next/router";
+import Link from 'next/link';
 
 const LogIn = () => {
-    const { loginUserData, changeLoginUserData, login } = useContext(UserContext);
+    const { formUserData, changeFormUserData, login, signup } = useContext(UserContext);
     const router = useRouter(); 
   return (
     <>
@@ -21,18 +22,18 @@ const LogIn = () => {
               <p>Welcome back, Please enter your details</p>
             </div>
             <div className='flex flex-col gap-2 w-full'>
-              <input type="text" placeholder="E-mail" className='border-gray-300 pl-3 input' onChange={(e) => {
-                changeLoginUserData(e.target.name, e.target.value);
-              }} value={loginUserData.email}></input>
-              <input type="password" placeholder="Password" className='border-gray-300 pl-3 input' onChange={(e) => {
-                changeLoginUserData(e.target.name, e.target.value);
-              }} value={loginUserData.password}></input>
+              <input type="text" name="email" placeholder="Email" className='border-gray-300 pl-3 input' onChange={(e) => {
+                changeFormUserData(e.target.name, e.target.value);
+              }} value={formUserData.email}></input>
+              <input type="password" name="password" placeholder="Password" className='border-gray-300 pl-3 input' onChange={(e) => {
+                changeFormUserData(e.target.name, e.target.value);
+              }} value={formUserData.password}></input>
               <button className='btn bg-blue-500 w-full' onClick={login}>Log In</button>
             </div>
             <div className='flex flex-row items-center'>
               <p className=''>Don't have account?</p>
               <Link href='/signup'>
-                  <button className='btn btn-active btn-link text-blue-500'>Sign up</button>
+                  <button className='btn btn-active btn-link text-blue-500' onClick={signup}>Sign up</button>
               </Link>
             </div>
         </div>
