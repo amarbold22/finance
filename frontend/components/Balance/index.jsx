@@ -2,7 +2,7 @@ import { StepContext } from "@/context/StepContext";
 import React, { useContext } from "react";
 
 const Balance = () => {
-  const { changeStepData } = useContext(StepContext);
+  const { stepData, changeStepData } = useContext(StepContext);
   return (
     <div className="flex flex-col w-full justify-center items-center">
       <div className="flex flex-col items-center gap-4 pt-8">
@@ -26,6 +26,7 @@ const Balance = () => {
         name="balance"
         type="text"
         placeholder="Balance"
+        value={stepData.balance}
         className="mt-8 input input-bordered w-full"
         onChange={(e) => {
           changeStepData(e.target.name, e.target.value);

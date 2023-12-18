@@ -2,7 +2,7 @@ import { UserContext } from "@/context/UserProvider";
 import React, { useContext } from "react";
 
 const Currency = () => {
-  const { changeFormUserData } = useContext(UserContext);
+  const { changeFormUserData, data } = useContext(UserContext);
   return (
     <>
       <div className="flex flex-col w-[384px] justify-center items-center">
@@ -33,10 +33,7 @@ const Currency = () => {
             changeFormUserData(e.target.name, e.target.value);
           }}
         >
-          <option disabled selected>
-            Select currency
-          </option>
-          <option value="MNT">MNT - Mongolian Tugrik</option>
+          <option value={"MNT"}>MNT - Mongolian Tugrik</option>
           <option value="USD">USD - US Dollar</option>
           <option value="CNY">CNY - Chinese Yuan</option>
         </select>

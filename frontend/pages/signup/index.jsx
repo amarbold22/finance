@@ -37,6 +37,7 @@ export default function Signup() {
               onChange={(e) => {
                 changeFormUserData(e.target.name, e.target.value);
               }}
+              value={changeFormUserData.user}
             ></input>
             <input
               type="text"
@@ -46,6 +47,7 @@ export default function Signup() {
               onChange={(e) => {
                 changeFormUserData(e.target.name, e.target.value);
               }}
+              value={changeFormUserData.email}
             ></input>
             <input
               type="password"
@@ -55,6 +57,7 @@ export default function Signup() {
               onChange={(e) => {
                 changeFormUserData(e.target.name, e.target.value);
               }}
+              value={changeFormUserData.password1}
             ></input>
             <input
               type="password"
@@ -64,6 +67,7 @@ export default function Signup() {
               onChange={(e) => {
                 changeFormUserData(e.target.name, e.target.value);
               }}
+              value={changeFormUserData.password2}
             ></input>
             <button className="btn bg-blue-500 w-full" onClick={signup}>
               Sign Up

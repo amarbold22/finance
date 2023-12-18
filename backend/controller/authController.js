@@ -10,7 +10,7 @@ const signup = async(req, res) => {
         const hashedPassword = bcrypt.hashSync(password, 10);
         const data = await sql `INSERT INTO users(email, name, password) VALUES(${email}, ${name}, ${hashedPassword}) RETURNING id`;
         const { id } = data[0];
-        res.status(200).json({ message: "Success", user: {id} });
+        res.status(200).json({ message: "Success", user: { id } });
     }
     catch(err){
         console.log(err);

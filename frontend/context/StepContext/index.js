@@ -20,16 +20,17 @@ export const StepProvider = ({ children }) => {
 
     const goToDashboard = async () => {
         try{
-            const { data } = await axios.put("http://localhost:8008/users/" + user.id, {
+            const { data } = await axios.put("http://localhost:8008/api/users/" + user.id, {
                 currency_type: stepData.currency_type,
                 balance: stepData.balance
             });
+            console.log("adgsdgas", data);
             setUser(data.user);
-            router.push("/"); 
+            router.push("/dashboard"); 
             console.log(user);
         }
         catch(err){
-            console.log(err);
+            console.log("hi", err);
         }
     }
 

@@ -13,6 +13,9 @@ const Step3 = () => {
       <div className="flex flex-col justify-center items-center w-96">
         <Finish />
         <button
+          value="submit"
+          type="submit"
+          name="submit"
           className="btn bg-blue-500 text-white mt-6 w-full"
           onClick={goToDashboard}
         >

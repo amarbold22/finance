@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
+import { UserContext } from "@/context/UserProvider";
 
 const Profile = () => {
+  const {} = useContext(UserContext);
   const [editOn, setEditOn] = useState(false);
   const [username, setUsername] = useState("Amarbold");
   const [email, setEmail] = useState("amr@gmail.com");

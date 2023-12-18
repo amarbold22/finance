@@ -66,6 +66,7 @@ const UserProvider = ({ children }) => {
           password: formUserData.password1,
         }
       );
+      console.log("data", data);
       setUser(data.user);
       router.push("/signup/step1");
     } catch (err) {
@@ -86,6 +87,7 @@ const UserProvider = ({ children }) => {
         login,
         logout,
         signup,
+        setUser,
       }}
     >
       {children}
