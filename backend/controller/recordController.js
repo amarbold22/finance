@@ -12,4 +12,15 @@ const addCat = async (req, res) => {
     }
 };
 
-module.exports = { addCat };
+const getCat = async (req, res) => {
+    try{
+        const categories = await sql `SELECT * FROM catagories`;
+        res.status(200).send({ message: "Success", categories});
+    }
+    catch(err){
+        console.log(err);
+        res.status(500).send({ message: "Failed"});
+    }
+}
+
+module.exports = { addCat, getCat };

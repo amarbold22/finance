@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import { TransactionContext } from "@/context/TransactionContext";
+import React, { useContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const Modal = () => {
+  const { transactionData, changeTransactionData } =
+    useContext(TransactionContext);
+  const [category, setCategory] = useState([]);
   const [modal, setModal] = useState(false);
   const [icons, setIcons] = useState([
     {
@@ -21,7 +26,7 @@ const Modal = () => {
       ),
     },
     {
-      name: "HouseLine",
+      name: "Food",
       svg: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +43,7 @@ const Modal = () => {
       ),
     },
     {
-      name: "IdentificationBadge",
+      name: "Bank",
       svg: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +60,7 @@ const Modal = () => {
       ),
     },
     {
-      name: "IdentificationCard",
+      name: "Finance",
       svg: (
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -72,6 +77,18 @@ const Modal = () => {
       ),
     },
   ]);
+
+  const getCategories = async () => {
+    const {
+      data: { categories },
+    } = await axios.get("http://localhost:8008/api/records");
+    console.log("res", categories);
+    setCategory(categories);
+  };
+
+  useEffect(() => {
+    getCategories();
+  }, []);
   return (
     <div className="modal-box flex flex-col gap-6 max-w-[1000px]">
       <div className="flex justify-between items-center pb-2 border-b-2">
@@ -93,6 +110,8 @@ const Modal = () => {
                     className="btn border-none w-1/2 rounded-full text-black hover:text-green-500"
                     onClick={() => {
                       setModal(true);
+                      changeTransactionData("transaction_type", "EXP");
+                      console.log(transactionData);
                     }}
                   >
                     Income
@@ -105,6 +124,8 @@ const Modal = () => {
                     className="btn border-none w-1/2 rounded-full text-black"
                     onClick={() => {
                       setModal(false);
+                      changeTransactionData("transaction_type", "INC");
+                      console.log(transactionData);
                     }}
                   >
                     Expense
@@ -117,9 +138,14 @@ const Modal = () => {
             </ul>
           </div>
           <input
+            name="amount"
+            value={transactionData.amount}
             type="text"
             placeholder="Amount"
             className="input w-full placeholder:text-black bg-gray-300 py-4"
+            onChange={(e) => {
+              changeTransactionData(e.target.name, e.target.value);
+            }}
           />
           <p className="px-3 text-lg">Category</p>
           <div className="dropdown dropdown-end w-full">
@@ -158,7 +184,7 @@ const Modal = () => {
                   <p>Add Category</p>
                 </a>
               </li>
-              <li>
+              {/* <li>
                 <a>Icon1</a>
               </li>
               <li>
@@ -169,7 +195,17 @@ const Modal = () => {
               </li>
               <li>
                 <a>Icon4</a>
-              </li>
+              </li> */}
+              {category.map((el) => {
+                return (
+                  <li>
+                    <div className="flex gap-4">
+                      <div>{el.svg}</div>
+                      {el.name}
+                    </div>
+                  </li>
+                );
+              })}
             </ul>
           </div>
           <div className="flex">

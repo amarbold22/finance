@@ -1,9 +1,10 @@
 const { Router } = require("express");
-const { addCat } = require("../controller/recordController");
+const { addCat, getCat } = require("../controller/recordController");
 
 const router = Router();
 // /api/records/signup
 
-router.route("/addCat").post(addCat);
+router.route("/").post(addCat);
+router.route("/").get(getCat);
 
 module.exports = router;
