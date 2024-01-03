@@ -5,10 +5,12 @@ import DoughnutChart from "@/components/DoughnutChart";
 import Record from "@/components/Records";
 import { UserContext } from "@/context/UserProvider";
 import { useRouter } from "next/router";
+import { TransactionContext } from "@/context/TransactionContext";
 
 const Dashboard = () => {
   const router = useRouter();
   const { user } = useContext(UserContext);
+  const { transactions } = useContext(TransactionContext);
 
   if (!user) router.push("/login");
 
@@ -139,11 +141,9 @@ const Dashboard = () => {
             Last Records
           </div>
           <div className="border-gray-900">
-            <Record />
-            <Record />
-            <Record />
-            <Record />
-            <Record />
+            {transactions.map((el) => (
+              <Record transaction={el} />
+            ))}
           </div>
         </div>
       </div>

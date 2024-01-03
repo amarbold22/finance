@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Record = () => {
+const Record = ({ transaction }) => {
   return (
     <div className="bg-white px-6 py-6 border-b-2 border-gray-300">
       <div className="flex justify-between items-center">
@@ -19,9 +19,9 @@ const Record = () => {
               />
             </svg>
           </div>
-          <div className="text-xl">Lending & Renting</div>
+          <div className="text-xl">${transaction.name}</div>
         </div>
-        <div className="text-green-500 text-xl">- 1000₮</div>
+        <div className="text-green-500 text-xl">${transaction.amount}₮</div>
       </div>
     </div>
   );

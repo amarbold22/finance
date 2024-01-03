@@ -1,4 +1,5 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
+import { redirect } from "next/navigation";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -77,6 +78,16 @@ const UserProvider = ({ children }) => {
   const logout = () => {
     setUser(null);
   };
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/login");
+    }
+  }, [user]);
+
+  // if (!user) {
+  //   redirect("/login");
+  // }
 
   return (
     <UserContext.Provider

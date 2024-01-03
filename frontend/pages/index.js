@@ -1,6 +1,7 @@
 import { UserContext } from '@/context/UserProvider';
 import { useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import { redirect } from 'next/navigation';
 
 export default function Home() {
   const router = useRouter();

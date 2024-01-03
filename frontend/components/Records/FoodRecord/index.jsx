@@ -1,6 +1,6 @@
 import React from "react";
 
-const FoodRecord = () => {
+const FoodRecord = ({ record }) => {
   return (
     <div className="flex bg-white p-4 rounded-xl justify-between items-center">
       <div className="flex gap-4 text-lg items-center">

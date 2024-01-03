@@ -1,9 +1,10 @@
 import { TransactionContext } from "@/context/TransactionContext";
 import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { format } from "../../utils/moment";
 
 const Modal = () => {
-  const { transactionData, changeTransactionData } =
+  const { transactionData, changeTransactionData, addTransaction } =
     useContext(TransactionContext);
   const [category, setCategory] = useState([]);
   const [modal, setModal] = useState(false);
@@ -24,6 +25,7 @@ const Modal = () => {
           />
         </svg>
       ),
+      id: "",
     },
     {
       name: "Food",
@@ -41,6 +43,7 @@ const Modal = () => {
           />
         </svg>
       ),
+      id: "08f9b410-c8a4-4823-b879-e397240a719d",
     },
     {
       name: "Bank",
@@ -58,6 +61,7 @@ const Modal = () => {
           />
         </svg>
       ),
+      id: "f7c44b15-ad6e-434b-ae9a-283e8210f9f9",
     },
     {
       name: "Finance",
@@ -75,8 +79,15 @@ const Modal = () => {
           />
         </svg>
       ),
+      id: "aae62980-94b7-43fe-a85d-7eb97a6e2f75",
     },
   ]);
+
+  const addRecord = async () => {
+    await addTransaction();
+    console.log(transactionData);
+    setModal(false);
+  };
 
   const getCategories = async () => {
     const {
@@ -89,6 +100,7 @@ const Modal = () => {
   useEffect(() => {
     getCategories();
   }, []);
+
   return (
     <div className="modal-box flex flex-col gap-6 max-w-[1000px]">
       <div className="flex justify-between items-center pb-2 border-b-2">
@@ -196,13 +208,20 @@ const Modal = () => {
               <li>
                 <a>Icon4</a>
               </li> */}
-              {category.map((el) => {
+              {icons.map((el) => {
                 return (
                   <li>
-                    <div className="flex gap-4">
+                    <button
+                      className="flex gap-4"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        changeTransactionData("category_id", el.id);
+                        console.log(transactionData);
+                      }}
+                    >
                       <div>{el.svg}</div>
                       {el.name}
-                    </div>
+                    </button>
                   </li>
                 );
               })}
@@ -211,24 +230,27 @@ const Modal = () => {
           <div className="flex">
             <div className="w-1/2 flex flex-col">
               <p className="text-lg pl-4">Date</p>
-              <div className="dropdown dropdown-bottom">
-                <div
-                  tabIndex={0}
-                  role="button"
-                  className="btn m-1 flex justify-between"
-                >
-                  <p>Oct 23, 2023</p>
-                  <p>↓</p>
-                </div>
-                <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box">
-                  <li>
-                    <a>Date</a>
-                  </li>
-                </ul>
+              <div className="flex-1">
+                {/* <label className="label">
+                  <span className="text-base label-text">Date</span>
+                </label> */}
+                <input
+                  type="datetime-local"
+                  placeholder="Oct 30,2023"
+                  className="w-full input input-bordered bg-[#F9FAFB]"
+                  name="updatedAt"
+                  onChange={(e) => {
+                    console.log("first", format(e.target.value));
+                    changeTransactionData(
+                      e.target.name,
+                      format(e.target.value)
+                    );
+                  }}
+                />
               </div>
             </div>
 
-            <div className="w-1/2 flex flex-col">
+            {/* <div className="w-1/2 flex flex-col">
               <p className="text-lg pl-4">Date</p>
               <div className="dropdown dropdown-bottom">
                 <div
@@ -245,18 +267,24 @@ const Modal = () => {
                   </li>
                 </ul>
               </div>
-            </div>
+            </div> */}
           </div>
           {!modal && (
             <>
-              <button className="btn bg-blue-500 rounded-full text-white">
+              <button
+                className="btn bg-blue-500 rounded-full text-white"
+                onClick={addRecord}
+              >
                 Add Record
               </button>
             </>
           )}
           {modal && (
             <>
-              <button className="btn bg-green-500 rounded-full text-white">
+              <button
+                className="btn bg-green-500 rounded-full text-white"
+                onClick={addRecord}
+              >
                 Add Record
               </button>
             </>
@@ -265,27 +293,25 @@ const Modal = () => {
         <div className="w-1/2 flex flex-col px-6 py-2 gap-4">
           <p className="text-xl">Payee</p>
           <div>
-            <div className="dropdown dropdown-bottom w-full">
-              <div
-                tabIndex={0}
-                role="button"
-                className="btn m-1 flex justify-between"
-              >
-                <p>Write Here</p>
-                <p>↓</p>
-              </div>
-              <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
-                <li>
-                  <a>Item 1</a>
-                </li>
-              </ul>
-            </div>
+            <input
+              name="name"
+              type="text"
+              placeholder="Type here"
+              className="input input-bordered input-lg w-full h-full self-stretch"
+              onChange={(e) => {
+                changeTransactionData(e.target.name, e.target.value);
+              }}
+            />
           </div>
           <p className="text-xl">Note</p>
           <input
+            name="description"
             type="text"
             placeholder="Type here"
             className="input input-bordered input-lg w-full h-full self-stretch"
+            onChange={(e) => {
+              changeTransactionData(e.target.name, e.target.value);
+            }}
           />
         </div>
       </div>
