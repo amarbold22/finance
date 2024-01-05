@@ -1,6 +1,6 @@
 import BarChart from "@/components/BarChart";
 import Navbar from "@/components/Navbar";
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import DoughnutChart from "@/components/DoughnutChart";
 import Record from "@/components/Records";
 import { UserContext } from "@/context/UserProvider";
@@ -12,7 +12,11 @@ const Dashboard = () => {
   const { user } = useContext(UserContext);
   const { transactions } = useContext(TransactionContext);
 
-  if (!user) router.push("/login");
+  if (!user) return null;
+
+  useEffect(() => {
+    if (!user) router.push("/login");
+  }, [user]);
 
   return (
     <>
