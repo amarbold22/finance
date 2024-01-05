@@ -23,7 +23,7 @@ const UserProvider = ({ children }) => {
   };
 
   const login = async () => {
-    if (!formUserData.email || !formUserData.password) {
+    if (!formUserData.email || !formUserData.password1) {
       alert("Email or Password can't be empty");
       return;
     }
@@ -32,7 +32,7 @@ const UserProvider = ({ children }) => {
         "http://localhost:8008/api/auth/signin",
         {
           userEmail: formUserData.email,
-          userPassword: formUserData.password,
+          userPassword: formUserData.password1,
         }
       );
       console.log("DDD++++++>", data.user);

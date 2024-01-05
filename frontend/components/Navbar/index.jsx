@@ -33,7 +33,7 @@ const Navbar = () => {
         </Link>
         <Link href="/profile">
           <div className="flex justify-center items-center w-10 h-10 rounded-full bg-blue-600 overflow-hidden">
-            <Image src="/avatar.avif" width={200} height={200} />
+            <Image src="/avatar.avif" alt="profile" width={200} height={200} />
           </div>
         </Link>
       </div>

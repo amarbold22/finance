@@ -25,9 +25,9 @@ const LogIn = () => {
               <input type="text" name="email" placeholder="Email" className='border-gray-300 pl-3 input' onChange={(e) => {
                 changeFormUserData(e.target.name, e.target.value);
               }} value={formUserData.email}></input>
-              <input type="password" name="password" placeholder="Password" className='border-gray-300 pl-3 input' onChange={(e) => {
+              <input type="password" name="password1" placeholder="Password" className='border-gray-300 pl-3 input' onChange={(e) => {
                 changeFormUserData(e.target.name, e.target.value);
-              }} value={formUserData.password}></input>
+              }} value={formUserData.password1}></input>
               <button className='btn bg-blue-500 w-full' onClick={login}>Log In</button>
             </div>
             <div className='flex flex-row items-center'>

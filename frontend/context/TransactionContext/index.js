@@ -1,8 +1,7 @@
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { UserContext } from "../UserProvider";
-import axios from "axios";
 import { toast } from "react-toastify";
-import axios from "@/utils/axios"
+import myAxios from "@/utils/axios"
 
 export const TransactionContext = createContext(null);
 
@@ -49,7 +48,7 @@ const TransactionProvider = ({ children }) => {
     }
     catch(error){
       console.log("TER", error);
-      toast.error("Гүйлгээг нэмэхэд алдаа гарлаа");
+      toast.error("Гүйлгээг нэмэхэд алдаа гарлааa");
     }
   }
 
