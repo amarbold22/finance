@@ -29,7 +29,8 @@ const TransactionProvider = ({ children }) => {
     try {
       const { data } = await myAxios.post("/api/transaction", {
         ...transactionData,
-        user_id: "87fafb5d-4370-49bd-a339-90f985931f81",
+        user_id: user.user_id ,
+        // "87fafb5d-4370-49bd-a339-90f985931f81",
       });
       setReFetch(!reFetch);
       toast.success("Гүйлгээг амжилттай нэмлээ.");
@@ -42,7 +43,7 @@ const TransactionProvider = ({ children }) => {
     try{
       const {
         data : { transactions },
-      } = await myAxios.get("/api/transaction/87fafb5d-4370-49bd-a339-90f985931f81");
+      } = await myAxios.get(`/api/transaction/${user.user_id}`);
       setTransactions(transactions);
       console.log(transactions);
     }
